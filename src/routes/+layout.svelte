@@ -10,11 +10,15 @@
   import { } from '$lib/db/scripts/april.js'
   import DragDropContext from '$lib/components/DragDropContext.svelte'
   import TheSnackbar from '/src/routes/[user]/components/TheSnackbar.svelte'
+  import { initializeClientErrorTracking } from '$lib/utils/errorTracking.js'
 
   let doingAuth = true
 
   onMount(() => {
     translateJSConstantsToCSSVariables()
+    
+    // Initialize global error tracking for automatic email notifications
+    initializeClientErrorTracking()
 
     // fetching user takes around 300 - 500 ms
     onAuthStateChanged(getAuth(), async (resultUser) => {
